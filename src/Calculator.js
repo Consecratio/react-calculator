@@ -14,27 +14,30 @@ export default class Calculator extends Component {
         this.setState({ [num]: e.target.value })
     }
 
-    sum = (e) => {
-        // add numbers in the state
-        let newNum = Number(this.state.num1) + Number(this.state.num2)
-        this.setState({ total: newNum })
-    }
+    total = (e) => {
+        let newNum
+        
+        switch(e.target.value) {
+            case "+":
+                // add numbers in the state
+                newNum = Number(this.state.num1) + Number(this.state.num2)
+                break
+            case "-":
+                // subtract numbers in the state
+                newNum = Number(this.state.num1) - Number(this.state.num2)
+                break
+            case "/":
+                // divide numbers in the state
+                newNum = Number(this.state.num1) / Number(this.state.num2)
+                break
+            case "*":
+                // multiply numbers in the state
+                newNum = Number(this.state.num1) * Number(this.state.num2)
+                break
+            default:
+                newNum = 0
+        }
 
-    sub = (e) => {
-        // add numbers in the state
-        let newNum = Number(this.state.num1) - Number(this.state.num2)
-        this.setState({ total: newNum })
-    }
-    
-    divide = (e) => {
-        // add numbers in the state
-        let newNum = Number(this.state.num1) / Number(this.state.num2)
-        this.setState({ total: newNum })
-    }
-
-    multiply = (e) => {
-        // add numbers in the state
-        let newNum = Number(this.state.num1) * Number(this.state.num2)
         this.setState({ total: newNum })
     }
 
@@ -57,10 +60,10 @@ export default class Calculator extends Component {
                         value={ this.state.num2 }
                         onChange={ (e) => this.setNum(e, 'num2')}
                     />
-                    <button onClick={(e) => this.sum(e)}>Sum</button>
-                    <button onClick={(e) => this.sub(e)}>Subtract</button>
-                    <button onClick={(e) => this.divide(e)}>Divide</button>
-                    <button onClick={(e) => this.multiply(e)}>Multiply</button>
+                    <button onClick={(e) => this.total(e)} value="+">Sum</button>
+                    <button onClick={(e) => this.total(e)} value="-">Subtract</button>
+                    <button onClick={(e) => this.total(e)} value="/">Divide</button>
+                    <button onClick={(e) => this.total(e)} value="*">Multiply</button>
                     <h3>{ this.state.total }</h3>
                 </div>
             </div>
